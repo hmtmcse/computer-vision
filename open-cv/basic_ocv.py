@@ -23,6 +23,21 @@ class BasicOCV:
         video.release()
         cv2.destroyAllWindows()
 
+    def show_default_webcam(self):
+        video = cv2.VideoCapture(0)
+        while video.isOpened():
+            status, image = video.read()
+            if not status:
+                print("Can't receive frame (stream end?). Exiting ...")
+                break
+
+            cv2.imshow("Show Webcam", image)
+
+            if cv2.waitKey(1) == ord('q'):
+                break
+        video.release()
+        cv2.destroyAllWindows()
+
 
 basic_ocv = BasicOCV()
-basic_ocv.play_video()
+basic_ocv.show_default_webcam()
